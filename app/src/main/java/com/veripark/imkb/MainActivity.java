@@ -1,5 +1,7 @@
 package com.veripark.imkb;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,6 +16,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.veripark.adapters.AllFilesAdapter;
 import com.veripark.fragments.HomeFragment;
 import com.veripark.fragments.LotsFragment;
 import com.veripark.supportclass.MenuModel;
@@ -31,6 +34,7 @@ import android.view.Menu;
 import com.veripark.supportclass.ExpandableListAdapter;
 
 import android.widget.ExpandableListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,8 +46,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-
+    SearchView searchView;
     ExpandableListAdapter expandableListAdapter;
+    AllFilesAdapter adapter;
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
@@ -59,22 +64,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-
         expandableListView = findViewById(R.id.expandableListView);
 
         prepareMenuData();
         populateExpandableList();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -83,11 +78,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
 
-        homeFragment = new HomeFragment(this);
         fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.id_container, homeFragment).commit();
 
+        homeFragment = new HomeFragment(this,fragmentManager);
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, homeFragment).commit();
+
+        adapter=new AllFilesAdapter(fragmentManager);
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -99,37 +97,83 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.main, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        // listening to search query text change
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
+            @Override
+            public boolean onQueryTextSubmit(String query)
+            {
+                // filter recycler view when query submitted
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query)
+            {
+                // filter recycler view when text is changed
+                adapter.getFilter().filter(query);
+                return false;
+            }
+        });
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search)
+        {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+
+
+        } else {
+            super.onBackPressed();
+        }
+
+
+        if (!searchView.isIconified())
+        {
+            searchView.setIconified(true);
+            return;
+        }
+        super.onBackPressed();
+    }
+
+
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -161,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (fragment != null) {
             fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.id_container, fragment).commit();
+            fragmentTransaction.replace(R.id.container, fragment).commit();
             return true;
         }
         return false;
@@ -238,7 +282,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             case "Hisse ve Endeksler" :
 
                                 Toast.makeText(getApplicationContext(),"ohisse ",Toast.LENGTH_SHORT).show();
-                                homeFragment=new LotsFragment();
                                 loadFragment(homeFragment);
                                 break;
 
@@ -264,8 +307,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         case "IMKB-30" :
 
                             Toast.makeText(getApplicationContext(),"ohisse ",Toast.LENGTH_SHORT).show();
-                            homeFragment=new LotsFragment();
-                            loadFragment(homeFragment);
+
 
 
                             break;

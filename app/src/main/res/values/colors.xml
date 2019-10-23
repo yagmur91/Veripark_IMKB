@@ -6,8 +6,7 @@
     <color name="colorcard">#A53036</color>
     <color name="colorBackground">#2C3E50</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorDivider">#727272</color>
-    <color name="colorSecondaryText">#757575</color>
+
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorImage">#FFD459</color>
     <color name="colorBorder">#e8e7e7</color>
@@ -20,6 +19,11 @@
     <color name="colorinsRed">#ed5565</color>
     <color name="colorYellow">#ffa700</color>
     <color name="colorinsYellow">#f8ac59</color>
+
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="colorDivider">#BDBDBD</color>
+    <color name="colorRow">#E5E6EC</color>
 
 
 

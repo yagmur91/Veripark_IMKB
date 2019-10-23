@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <TextView
+            android:id="@+id/txtSembolDetay"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
+            android:text="deneme: "
+            android:textColor="@color/colorBlack"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/txtFiyatDetay"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/txtSembolDetay"
+            android:text="Dosya No: "
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:id="@+id/txtFarkDetay"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/txtFiyatDetay"
+            android:text=" No: "
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:id="@+id/txtHacimDetay"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/txtFarkDetay"
+            android:text=" No: "
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:id="@+id/txtAlisDetay"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/txtHacimDetay"
+            android:text=" No: "
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:textSize="14dp"/>
+        <TextView
+            android:id="@+id/txtSatisDetay"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/txtAlisDetay"
+            android:text=" No: "
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:textSize="14dp"/>
+
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

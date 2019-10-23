@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/row_height">
+
+
+
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/txtSembol"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_height="match_parent"/>
+
+
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/txtFiyat"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/txtFark"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/txtHacim"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/txtAlis"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/txtSatis"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_height="match_parent"/>
+
+
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/txtDegisim"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
